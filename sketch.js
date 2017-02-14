@@ -13,15 +13,12 @@ var ww = 1024;
 var hh = 512;
 
 var zoom = 5;
-//var earthquakes;
 
 function preload() {
   mapimg = loadImage('https://api.mapbox.com/styles/v1/mapbox/dark-v9/static/' +
     clon + ',' + clat + ',' + zoom + '/' +
     ww + 'x' + hh +
     '?access_token=pk.eyJ1Ijoic3RlZmFuZHkiLCJhIjoiY2l6NHcxNW96MDU0ZTJ3cDhmZHZzbTJnbiJ9.zhbVCkE0TCIC01rVngePTg');
-  // earthquakes = loadStrings('http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.csv');
-  //earthquakes = loadStrings('http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv');
 }
 
 function mercX(lon) {
@@ -48,29 +45,40 @@ function setup() {
   translate(width / 2, height / 2);
   imageMode(CENTER);
   image(mapimg, 0, 0);
+}
+
+function draw() {
+  translate(width / 2, height / 2);
 
   var cx = mercX(clon);
   var cy = mercY(clat);
 
+  //Toronto 43.6532° N, 79.3832° W
+  stroke(255, 0, 255);
+  fill(255, 0, 0, 200);
 
+  ellipse(0, 0, 20, 20);
 
-  ellipse()
-
-  // for (var i = 1; i < earthquakes.length; i++) {
-  //   var data = earthquakes[i].split(/,/);
-  //   //console.log(data);
-  //   var lat = data[1];
-  //   var lon = data[2];
-  //   var mag = data[4];
-  //   var x = mercX(lon) - cx;
-  //   var y = mercY(lat) - cy;
-  //   mag = pow(10, mag);
-  //   mag = sqrt(mag);
-  //   var magmax = sqrt(pow(10, 10));
-  //   var d = map(mag, 0, magmax, 0, 180);
-  //   stroke(255, 0, 255);
-  //   fill(255, 0, 255, 200);
-  //   ellipse(x, y, d, d);
-  // }
+  targX = mercX(43.6532) - cx;
+  targY = mercY(-79.3832) - cy;
+  ellipse(targX, targY, 20, 20);
 
 }
+
+//////////////////////////////////////
+// for (var i = 1; i < earthquakes.length; i++) {
+//   var data = earthquakes[i].split(/,/);
+//   //console.log(data);
+//   var lat = data[1];
+//   var lon = data[2];
+//   var mag = data[4];
+//   var x = mercX(lon) - cx;
+//   var y = mercY(lat) - cy;
+//   mag = pow(10, mag);
+//   mag = sqrt(mag);
+//   var magmax = sqrt(pow(10, 10));
+//   var d = map(mag, 0, magmax, 0, 180);
+//   stroke(255, 0, 255);
+//   fill(255, 0, 255, 200);
+//   ellipse(x, y, d, d);
+// }
